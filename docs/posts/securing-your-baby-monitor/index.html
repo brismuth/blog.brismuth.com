@@ -211,9 +211,19 @@ Yikes! What can you do?" />
 <p>The way most baby monitors handle authentication is via <a href="https://en.wikipedia.org/wiki/Basic_access_authentication">HTTP basic auth</a>. This protocol requires that your browser send your username and password with every single request. If this is happening over an HTTP connection, than any attacker with access to any network between your browser and your camera will have the ability to <em>steal your camera credentials</em>. In order for your camera to be safe, your connection to the proxy will need to be encrypted.</p>
 <p>Fortunately, getting an SSL certificate is now easier than ever thanks to <a href="https://letsencrypt.org/">Let’s Encrypt</a>. You’ll need a DNS name pointing at your home IP address if you want the SSL cert to work without any errors. In a future post I’ll add more details about how to set that up, but for now you’ll hopefully be able to find the guides you need on the Let’s Encrypt site. If you need dynamic DNS for this, you should be able to find a free provider online, such as <a href="https://www.noip.com/">https://www.noip.com/</a>.</p>
 <h4 id="nginx">Nginx</h4>
-<p>Finally it’s time to configure the nginx server. For a basic setup with SSL, this is all you need:
-<code>server {     listen 443 ssl;   server_name myhomedomain.com;``        ssl_certificate /path/to/your/openssl.pem;   ssl_certificate_key /path/to/your/openssl.key;``        location /camera/ {   proxy_pass [http://192.168.1.146:80/;](http://192.168.1.146:80/;)   }   }</code></p>
-<ol>
+<p>Finally it’s time to configure the nginx server. For a basic setup with SSL, this is all you need:</p>
+<pre><code>server {    
+        listen 443 ssl;  
+        server_name myhomedomain.com;
+
+        ssl_certificate /path/to/your/openssl.pem;  
+        ssl_certificate_key /path/to/your/openssl.key;
+
+        location /camera/ {  
+                proxy_pass http://192.168.1.146:80/;  
+        }  
+}
+</code></pre><ol>
 <li>Replace myhomedomain.com with the DNS address you have pointing at your home IP</li>
 <li>Replace the SSL cert paths with the path you got from Let’s Encrypt.</li>
 <li>Replace the IP address in the location block with that of your IP camera.</li>
@@ -221,17 +231,20 @@ Yikes! What can you do?" />
 <li>Restart nginx</li>
 <li>You should now be able to go to <a href="https://myhomedomain.com/camera">https://myhomedomain.com/camera</a> and see your camera. If your camera is configured with HTTP basic auth, it will show a popup like this:
 <img src="/posts/securing-your-baby-monitor/images/1.png" alt="image">
-The HTTP auth for my home camera</li>
+<em>The HTTP auth for my home camera</em></li>
 </ol>
 <p>At this point you should be able to login and view your camera through the SSL proxy using the credentials you originally set up on your camera.</p>
 <h4 id="additional-security-with-a-better-password">Additional security with a better password</h4>
-<p>As I mentioned before, my camera limits me to 12 character passwords. That’s an atrocious length for a password that’s open to the world and susceptible to brute forcing. Fortunately, now that the nginx proxy is set up, we can improve that. First we’ll want to generate HTTP basic auth credentials of our own on the new server. Assuming Ubuntu:
-<code>sudo -i   apt-get install nginx apache2-utils   htpasswd -c /etc/nginx/.htpasswd admin</code></p>
-<p>After following the prompt, you will have a new credentials file called <code>.htpasswd</code>. The user will be “admin” and the password will be the one you typed in. I recommend making a long, random password using a password manager like LastPass. Mine is around 100 characters. Now you just need to add a few lines to your nginx config to use the authentication. Add these two lines inside your main server block:
-<code>auth_basic &amp;#34;Restricted&amp;#34;;   auth_basic_user_file /etc/nginx/.htpasswd;</code></p>
-<p>If your camera also uses HTTP basic authentication (like mine does), you’ll have to handle that now. Otherwise, your camera will not accept the HTTP auth header that your browser sends to the nginx proxy. You can do that by adding a line similar to this one inside your /camera/ location block:
-<code>proxy_set_header Authorization &amp;#34;Basic YWRtaW46ZmFrZXBhc3N3b3Jk&amp;#34;;</code></p>
-<p>Replace the long string after “Basic” with the “username:password” your IP camera uses, base64 encoded. An easy way to get the string is by using the Chrome network inspector:</p>
+<p>As I mentioned before, my camera limits me to 12 character passwords. That’s an atrocious length for a password that’s open to the world and susceptible to brute forcing. Fortunately, now that the nginx proxy is set up, we can improve that. First we’ll want to generate HTTP basic auth credentials of our own on the new server. Assuming Ubuntu:</p>
+<pre><code>sudo -i  
+apt-get install nginx apache2-utils  
+htpasswd -c /etc/nginx/.htpasswd admin
+</code></pre><p>After following the prompt, you will have a new credentials file called <code>.htpasswd</code>. The user will be “admin” and the password will be the one you typed in. I recommend making a long, random password using a password manager like LastPass. Mine is around 100 characters. Now you just need to add a few lines to your nginx config to use the authentication. Add these two lines inside your main server block:</p>
+<pre><code>auth_basic &quot;Restricted&quot;;  
+auth_basic_user_file /etc/nginx/.htpasswd;
+</code></pre><p>If your camera also uses HTTP basic authentication (like mine does), you’ll have to handle that now. Otherwise, your camera will not accept the HTTP auth header that your browser sends to the nginx proxy. You can do that by adding a line similar to this one inside your /camera/ location block:</p>
+<pre><code>proxy_set_header Authorization &quot;Basic YWRtaW46ZmFrZXBhc3N3b3Jk&quot;
+</code></pre><p>Replace the long string after “Basic” with the “username:password” your IP camera uses, base64 encoded. An easy way to get the string is by using the Chrome network inspector:</p>
 <ol>
 <li>In Chrome, open the developer tools</li>
 <li>Click on the Network tab</li>
@@ -240,12 +253,12 @@ The HTTP auth for my home camera</li>
 <li>Login with the original credentials for your camera (not the ones we just created)</li>
 <li>Look at headers for any request in your network tab that is going to the IP camera. You’ll see something like this:
 <img src="/posts/securing-your-baby-monitor/images/2.png" alt="image">
-“YWRtaW46ZmFrZXBhc3N3b3Jk” is <code>admin:fakepassword</code>, base64 encoded</li>
+<em>“YWRtaW46ZmFrZXBhc3N3b3Jk” is <code>admin:fakepassword</code>, base64 encoded</em></li>
 </ol>
 <p>Your character string will be significantly longer if you chose a long password. Go ahead and copy that character string and put it into your nginx config, then restart nginx again.</p>
 <p>You should now be able to go to <a href="https://myhomedomain.com/camera">https://myhomedomain.com/camera</a> and sign in using the new credentials you generated. Now that you’re using a ~100 character password over SSL, your camera is significantly safer from the bad guys. Whew!</p>
 <p><img src="/posts/securing-your-baby-monitor/images/3.jpeg" alt="image">
-Nap time!</p>
+<em>Nap time!</em></p>
 
     </div>
     

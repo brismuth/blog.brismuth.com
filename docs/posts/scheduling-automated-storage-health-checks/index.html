@@ -200,7 +200,7 @@
 <p>If that worked, we can proceed with scheduling the tests. Go ahead and bring up your crontab for editing:
 <code>sudo crontab -e</code></p>
 <p>You’ll add something like this at the bottom of the file:
-<code># smartctl every month   0 2 2 * * /usr/sbin/smartctl --test=long /dev/sda &amp;amp;&amp;gt; /dev/null   0 13 4 * * (/usr/sbin/smartctl -a -d ata /dev/sda) | /bin/grep &amp;#34;Serial\|Firmware\|result:\|Reallocated_Sector_Ct\|Spin_Retry_Count\|Reallocated_Event_Count\|Current_Pending_Sector\|Offline_Uncorrectable\|Extended\ offline&amp;#34;</code></p>
+<code># smartctl every month   0 2 2 * * /usr/sbin/smartctl --test=long /dev/sda &amp;amp;&amp;gt; /dev/null   0 13 4 * * (/usr/sbin/smartctl -a -d ata /dev/sda) | /bin/grep &quot;Serial\|Firmware\|result:\|Reallocated_Sector_Ct\|Spin_Retry_Count\|Reallocated_Event_Count\|Current_Pending_Sector\|Offline_Uncorrectable\|Extended\ offline&quot;</code></p>
 <p>The first line will run a command at 2 am on the 2nd of every month to run a long test on your drive. The “/dev/null” portion just gets rid of any output from this command so you don’t get any messy emails from the non-report portion of the test.</p>
 <p>The second line will run a command at 1 pm on the 4th of every month to get the full report of the same drive, giving the long health test plenty of time to complete. The “grep” portion strips out everything that doesn’t match what’s in the quotes, so you don’t get a huge email with a bunch of things you don’t care about. If all went well, you should get a single email that looks something like this on the 4th of every month:
 `Serial Number:    S2HGJ1DB100001<br>
