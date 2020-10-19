@@ -185,39 +185,42 @@
 <p><strong><em>Note: this post assumes you are running Ubuntu. Things won’t be as easy to automate in Windows.</em></strong></p>
 <h4 id="step-1-configure-your-email-preferences">Step 1: configure your email preferences</h4>
 <p>I think the easiest way to configure email is to set your server up to use your gmail account. You can follow this guide to set that up:<a href="https://easyengine.io/tutorials/linux/ubuntu-postfix-gmail-smtp/">https://easyengine.io/tutorials/linux/ubuntu-postfix-gmail-smtp/</a>.</p>
-<p>After you’ve set up your server to use your gmail account, you’ll want to set your personal email address to be the recipient for cron jobs. You can do this by adding something like this to your /etc/aliases file:
-<code>root:           brismuth   brismuth:       [brismuth@gmail.com](mailto:brismuth@gmail.com)</code></p>
-<p>You’ll want to replace “brismuth” with your username and you’ll want to use your own email address at the end. This file tells your computer that all email intended for the “root” user should be sent to the “brismuth” user, and that all email intended for the “brismuth” user should be sent to “brismuth@gmail.com”.</p>
+<p>After you’ve set up your server to use your gmail account, you’ll want to set your personal email address to be the recipient for cron jobs. You can do this by adding something like this to your <code>/etc/aliases</code> file:</p>
+<pre><code>root:           brismuth  
+brismuth:       [brismuth@gmail.com](mailto:brismuth@gmail.com)
+</code></pre><p>You’ll want to replace “brismuth” with your username and you’ll want to use your own email address at the end. This file tells your computer that all email intended for the “root” user should be sent to the “brismuth” user, and that all email intended for the “brismuth” user should be sent to “brismuth@gmail.com”.</p>
 <h4 id="step-2-schedule-the-drive-tests">Step 2: schedule the drive tests</h4>
-<p>The Linux tool for accessing the SMART reporting framework is called <a href="https://help.ubuntu.com/community/Smartmontools">Smartmontools</a>. You can install it like this:
-<code>sudo apt-get install smartmontools</code></p>
-<p>Smartmontools gives you access to a lot of different things through the smartctl command line tool that comes with it. You can run a short test that checks that basic disk functionality is healthy, or you can run a long test (several hours) that checks every sector of your hard drive. You can also see a report of different statuses and metrics that your drive keeps track of in the background. You can find what each of the different rows mean <a href="https://en.wikipedia.org/wiki/S.M.A.R.T.#ATA_S.M.A.R.T._attributes">on Wikipedia</a>.</p>
-<p>I set my server up to do a long drive test of each of my hard drives every month, and then email me only the attributes that I care about. Basically it strips out all of the indicators except for the ones that indicate imminent failure. To set your server up the same way, you’ll want to first get the logical names of your hard drives. You can find this out like so:
-<code>df -h</code></p>
-<p>This will print out a list of mounted drives. Look for the mount point that you care abou tin the column on the right; it will probably be something like “/”. Get the matching “Filesystem” entry for the same line from the far left column. It will probably be something like “/dev/sda1”. Removing any trailing numbers will get you location of the disk in your system, i.e. “/dev/sda”.</p>
-<p>Now let’s confirm that we have the location of your disk correct. You should be able to run the following command to see a status page for your disk:
-<code>smartctl -a -d ata /dev/sda</code></p>
-<p>If that worked, we can proceed with scheduling the tests. Go ahead and bring up your crontab for editing:
-<code>sudo crontab -e</code></p>
-<p>You’ll add something like this at the bottom of the file:
-<code># smartctl every month   0 2 2 * * /usr/sbin/smartctl --test=long /dev/sda &amp;amp;&amp;gt; /dev/null   0 13 4 * * (/usr/sbin/smartctl -a -d ata /dev/sda) | /bin/grep &quot;Serial\|Firmware\|result:\|Reallocated_Sector_Ct\|Spin_Retry_Count\|Reallocated_Event_Count\|Current_Pending_Sector\|Offline_Uncorrectable\|Extended\ offline&quot;</code></p>
-<p>The first line will run a command at 2 am on the 2nd of every month to run a long test on your drive. The “/dev/null” portion just gets rid of any output from this command so you don’t get any messy emails from the non-report portion of the test.</p>
-<p>The second line will run a command at 1 pm on the 4th of every month to get the full report of the same drive, giving the long health test plenty of time to complete. The “grep” portion strips out everything that doesn’t match what’s in the quotes, so you don’t get a huge email with a bunch of things you don’t care about. If all went well, you should get a single email that looks something like this on the 4th of every month:
-`Serial Number:    S2HGJ1DB100001<br>
-Firmware Version: 1AQ10001<br>
-SMART overall-health self-assessment test result: PASSED<br>
-5 Reallocated_Sector_Ct   0x0033   252   252   010    Pre-fail  Always       -       0<br>
-10 Spin_Retry_Count        0x0032   252   252   051    Old_age   Always       -       0<br>
-196 Reallocated_Event_Count 0x0032   252   252   000    Old_age   Always       -       0<br>
-197 Current_Pending_Sector  0x0032   252   252   000    Old_age   Always       -       0<br>
-198 Offline_Uncorrectable   0x0030   252   252   000    Old_age   Offline      -       0</p>
-<h1 id="1--extended-offline----completed-without-error-------00------8539----------">1  Extended offline    Completed without error       00%      8539         -</h1>
-<h1 id="2--extended-offline----completed-without-error-------00------7797----------">2  Extended offline    Completed without error       00%      7797         -</h1>
-<h1 id="3--extended-offline----completed-without-error-------00------7126----------">3  Extended offline    Completed without error       00%      7126         -</h1>
-<h1 id="4--extended-offline----completed-without-error-------00------4158----------">4  Extended offline    Completed without error       00%      4158         -</h1>
-<h1 id="5--extended-offline----completed-without-error-------00-------539----------">5  Extended offline    Completed without error       00%       539         -</h1>
-<h1 id="6--extended-offline----completed-without-error-------00-------529----------">6  Extended offline    Completed without error       00%       529         -`</h1>
-<p>That’s all! As long as your “Extended offline” entries there at the bottom keep saying “Completed without error”, your drives <em>should</em> be ok. If you start having failures there, it’s probably time to get a new drive.</p>
+<p>The Linux tool for accessing the SMART reporting framework is called <a href="https://help.ubuntu.com/community/Smartmontools">Smartmontools</a>. You can install it like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get install smartmontools
+</code></pre></div><p>Smartmontools gives you access to a lot of different things through the smartctl command line tool that comes with it. You can run a short test that checks that basic disk functionality is healthy, or you can run a long test (several hours) that checks every sector of your hard drive. You can also see a report of different statuses and metrics that your drive keeps track of in the background. You can find what each of the different rows mean <a href="https://en.wikipedia.org/wiki/S.M.A.R.T.#ATA_S.M.A.R.T._attributes">on Wikipedia</a>.</p>
+<p>I set my server up to do a long drive test of each of my hard drives every month, and then email me only the attributes that I care about. Basically it strips out all of the indicators except for the ones that indicate imminent failure. To set your server up the same way, you’ll want to first get the logical names of your hard drives. You can find this out like so:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">df -h
+</code></pre></div><p>This will print out a list of mounted drives. Look for the mount point that you care abou tin the column on the right; it will probably be something like “/”. Get the matching “Filesystem” entry for the same line from the far left column. It will probably be something like “/dev/sda1”. Removing any trailing numbers will get you location of the disk in your system, i.e. “/dev/sda”.</p>
+<p>Now let’s confirm that we have the location of your disk correct. You should be able to run the following command to see a status page for your disk:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">smartctl -a -d ata /dev/sda<span style="color:#e6db74">`</span>
+</code></pre></div><p>If that worked, we can proceed with scheduling the tests. Go ahead and bring up your crontab for editing:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo crontab -e<span style="color:#e6db74">`</span>
+</code></pre></div><p>You’ll add something like this at the bottom of the file:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># smartctl every month  </span>
+<span style="color:#ae81ff">0</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">2</span> * * /usr/sbin/smartctl --test<span style="color:#f92672">=</span>long /dev/sda &amp;&gt; /dev/null  
+<span style="color:#ae81ff">0</span> <span style="color:#ae81ff">13</span> <span style="color:#ae81ff">4</span> * * <span style="color:#f92672">(</span>/usr/sbin/smartctl -a -d ata /dev/sda<span style="color:#f92672">)</span> | /bin/grep <span style="color:#e6db74">&#34;Serial\|Firmware\|result:\|Reallocated_Sector_Ct\|Spin_Retry_Count\|Reallocated_Event_Count\|Current_Pending_Sector\|Offline_Uncorrectable\|Extended\ offline&#34;</span><span style="color:#e6db74">`</span>
+</code></pre></div><p>The first line will run a command at 2 am on the 2nd of every month to run a long test on your drive. The “/dev/null” portion just gets rid of any output from this command so you don’t get any messy emails from the non-report portion of the test.</p>
+<p>The second line will run a command at 1 pm on the 4th of every month to get the full report of the same drive, giving the long health test plenty of time to complete. The “grep” portion strips out everything that doesn’t match what’s in the quotes, so you don’t get a huge email with a bunch of things you don’t care about. If all went well, you should get a single email that looks something like this on the 4th of every month:</p>
+<pre><code>Serial Number:    S2HGJ1DB100001  
+Firmware Version: 1AQ10001  
+SMART overall-health self-assessment test result: PASSED  
+  5 Reallocated_Sector_Ct   0x0033   252   252   010    Pre-fail  Always       -       0  
+ 10 Spin_Retry_Count        0x0032   252   252   051    Old_age   Always       -       0  
+196 Reallocated_Event_Count 0x0032   252   252   000    Old_age   Always       -       0  
+197 Current_Pending_Sector  0x0032   252   252   000    Old_age   Always       -       0  
+198 Offline_Uncorrectable   0x0030   252   252   000    Old_age   Offline      -       0  
+# 1  Extended offline    Completed without error        00%      8539         -  
+# 2  Extended offline    Completed without error        00%      7797         -  
+# 3  Extended offline    Completed without error        00%      7126         -  
+# 4  Extended offline    Completed without error        00%      4158         -  
+# 5  Extended offline    Completed without error        00%       539         -  
+# 6  Extended offline    Completed without error        00%       529
+</code></pre><p>That’s all! As long as your “Extended offline” entries there at the bottom keep saying “Completed without error”, your drives <em>should</em> be ok. If you start having failures there, it’s probably time to get a new drive.</p>
 
     </div>
     

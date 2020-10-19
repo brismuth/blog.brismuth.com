@@ -194,23 +194,23 @@ Step 1: Enable the feature This feature is still in the experimental phase as of
 <h4 id="step-1-enable-the-feature">Step 1: Enable the feature</h4>
 <p>This feature is still in the experimental phase as of Chrome OS 68, so you’ll need to enable it. Navigate to <em>chrome://flags/#native-smb</em> in your browser and change the dropdown for “Native Smb Client” to “Enabled”. It’ll prompt you to restart Chrome — go ahead and do it.</p>
 <p><img src="/posts/how-to-use-chrome-oss-native-samba-client/images/1.png" alt="image">
-Enable the Chrome flag for the native Smb client.</p>
+<em>Enable the Chrome flag for the native Smb client.</em></p>
 <h4 id="step-2-add-the-samba-share">Step 2: Add the Samba share</h4>
 <p>You can now add new Samba shares via the Files app by clicking on “Add new services” on the left hand side, and then “SMB Shares”:</p>
 <p><img src="/posts/how-to-use-chrome-oss-native-samba-client/images/2.png" alt="image">
-Click “SMB Shares”.</p>
+<em>Click “SMB Shares”.</em></p>
 <p>This will open to the “Network File Shares” tab in your Chrome OS Settings app. Click “Add File Share”:</p>
 <p><img src="/posts/how-to-use-chrome-oss-native-samba-client/images/3.png" alt="image">
-Click “Add File Share”.</p>
+<em>Click “Add File Share”.</em></p>
 <p>Next, fill in the File Share URL, the Username, and the Password. This part was a little annoying for me because I wasn’t sure what format the URL needed to be in. After trial and error (and googling) I found that the URL should be like “smb://SERVERNAME/SHARENAME”.</p>
 <p>I also was incorrectly using the path to the share from my Samba server instead of using the actual share name that I configured in Samba (oops). That doesn’t work.</p>
 <p>Here’s what my screen looks like to add my share:</p>
 <p><img src="/posts/how-to-use-chrome-oss-native-samba-client/images/4.png" alt="image">
-Click “Add” when you’re finished</p>
+<em>Click “Add” when you’re finished</em></p>
 <h4 id="step-3-use-the-new-samba-share">Step 3: Use the new Samba share</h4>
 <p>If you go back to your Files app, you’ll now see the new Samba share you added in your left sidebar:</p>
 <p><img src="/posts/how-to-use-chrome-oss-native-samba-client/images/5.png" alt="image">
-The share shows up in the left side menu of the Files app.</p>
+<em>The share shows up in the left side menu of the Files app.</em></p>
 <p>You should now be able to navigate around in the network share and open files.</p>
 <h4 id="caveats">Caveats</h4>
 <p>Native support for Samba shares is still an experimental feature on Chrome OS. They may change the way it works, or remove it altogether, and there are some downsides to using it in its present condition. Additional caveats:</p>

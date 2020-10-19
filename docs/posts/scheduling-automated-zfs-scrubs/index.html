@@ -192,29 +192,33 @@
 <p>The second way is preferable because you can repair corruption quickly even on rarely accessed files. It is relatively easy to schedule this to happen regularly without any effort on your part. <em>Note that if you don’t care about getting emailed results, you can skip straight to Step 2.</em></p>
 <h4 id="step-1-configure-your-email-preferences">Step 1: configure your email preferences</h4>
 <p>I think the easiest way to configure email is to set your server up to use your gmail account. You can follow this guide to set that up: <a href="https://easyengine.io/tutorials/linux/ubuntu-postfix-gmail-smtp/">https://easyengine.io/tutorials/linux/ubuntu-postfix-gmail-smtp/</a>.</p>
-<p>After you’ve set up your server to use your gmail account, you’ll want to set your personal email address to be the recipient for cron jobs. You can do this by adding something like this to your /etc/aliases file:
-<code>root:           brismuth   brismuth:       [brismuth@gmail.com](mailto:brismuth@gmail.com)</code></p>
-<p>You’ll want to replace “brismuth” with your username and you’ll want to use your own email address at the end. This file tells your computer that all email intended for the “root” user should be sent to the “brismuth” user, and that all email intended for the “brismuth” user should be sent to “brismuth@gmail.com”.</p>
+<p>After you’ve set up your server to use your gmail account, you’ll want to set your personal email address to be the recipient for cron jobs. You can do this by adding something like this to your /etc/aliases file:</p>
+<pre><code>root:           brismuth  
+brismuth:       [brismuth@gmail.com](mailto:brismuth@gmail.com)
+</code></pre><p>You’ll want to replace “brismuth” with your username and you’ll want to use your own email address at the end. This file tells your computer that all email intended for the “root” user should be sent to the “brismuth” user, and that all email intended for the “brismuth” user should be sent to “brismuth@gmail.com”.</p>
 <h4 id="step-2-schedule-the-zfs-scrub">Step 2: schedule the ZFS scrub</h4>
-<p>The email configuration was the hard part. Now all you have to do is add some scheduled commands to your crontab. You can edit your crontab like this:
-<code>sudo crontab -e</code></p>
-<p>You’ll just want to add something like the following lines at the bottom of the file:
-<code># zpool scrub every month   0 2 1 * * /sbin/zpool scrub files   0 13 1 * * /sbin/zpool status</code></p>
-<p>The above lines will schedule a zpool scrub to take place at 2 am on the first of every month. At 1 pm (13:00), it will check the pool status to make sure the scrub went well and has completed. In this case, “files” is the name of my zpool, and you’ll want to replace it with that of your own. If you aren’t sure what the name of yours is, you can see a list of pools by checking zpool status:
-<code>zpool status</code></p>
-<p>That’s it! Now, on the first of every month, you’ll get an email that looks something like this:
-`pool: files<br>
-state: ONLINE<br>
-scan: scrub repaired 0 in 2h27m with 0 errors on Fri Apr  1 04:27:04 2016<br>
-config:</p>
-<pre><code>    NAME        STATE     READ WRITE CKSUM  
-    files       ONLINE       0     0     0  
-      mirror-0  ONLINE       0     0     0  
-        sdb     ONLINE       0     0     0  
-        sdc     ONLINE       0     0     0  
-</code></pre>
-<p>errors: No known data errors`</p>
-<p>Congratulations, you now have the peace of mind that can only come from monthly emails letting you know that your files are safe!</p>
+<p>The email configuration was the hard part. Now all you have to do is add some scheduled commands to your crontab. You can edit your crontab like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo crontab -e
+</code></pre></div><p>You’ll just want to add something like the following lines at the bottom of the file:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># zpool scrub every month  </span>
+<span style="color:#ae81ff">0</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">1</span> * * /sbin/zpool scrub files  
+<span style="color:#ae81ff">0</span> <span style="color:#ae81ff">13</span> <span style="color:#ae81ff">1</span> * * /sbin/zpool status
+</code></pre></div><p>The above lines will schedule a zpool scrub to take place at 2 am on the first of every month. At 1 pm (13:00), it will check the pool status to make sure the scrub went well and has completed. In this case, “files” is the name of my zpool, and you’ll want to replace it with that of your own. If you aren’t sure what the name of yours is, you can see a list of pools by checking zpool status:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">zpool status
+</code></pre></div><p>That’s it! Now, on the first of every month, you’ll get an email that looks something like this:</p>
+<pre><code>pool: files  
+ state: ONLINE  
+  scan: scrub repaired 0 in 2h27m with 0 errors on Fri Apr  1 04:27:04 2016  
+config:  
+
+        NAME        STATE     READ WRITE CKSUM  
+        files       ONLINE       0     0     0  
+          mirror-0  ONLINE       0     0     0  
+            sdb     ONLINE       0     0     0  
+            sdc     ONLINE       0     0     0  
+
+errors: No known data errors
+</code></pre><p>Congratulations, you now have the peace of mind that can only come from monthly emails letting you know that your files are safe!</p>
 <p>:)</p>
 
     </div>

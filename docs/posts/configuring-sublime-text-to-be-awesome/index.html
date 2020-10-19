@@ -188,7 +188,7 @@ Sublime Text 3 is without a doubt my favorite text editor. It has a super flexib
     <div class="post-content">
       
       <p><img src="/posts/configuring-sublime-text-to-be-awesome/images/1.png" alt="image">
-Your text editor could look like this.</p>
+<em>Your text editor could look like this.</em></p>
 <p>Sublime Text 3 is without a doubt my favorite text editor. It has a super flexible plugin API, and people have done some pretty amazing things with it. It has a much smaller footprint than an IDE like NetBeans/Eclipse/IntelliJ. It offers a lot of power with multi-cursor operations and bulk text editing. This post details some of my favorite plugins and the settings I prefer to use with Sublime.</p>
 <h4 id="step-1-install-package-control">Step 1: Install Package Control</h4>
 <p>First off, you’ll need to install Package Control. Package Control is basically the app store for Sublime. It makes installing plugins a breeze. To install it, follow the instructions on the <a href="https://packagecontrol.io/installation#Simple">Package Control website</a>.</p>
@@ -211,13 +211,37 @@ Your text editor could look like this.</p>
 </ul>
 <h4 id="step-3-set-up-your-user-preferences">Step 3: Set up your user preferences</h4>
 <p>One of the nice things about Sublime is that it has highly customizable settings that let you change behavior, appearance, and more. You can read about them and all available preferences in the Sublime default preferences file. Here are Sublime’s instructions for modifying settings: <a href="https://www.sublimetext.com/docs/3/settings.html">https://www.sublimetext.com/docs/3/settings.html</a>.</p>
-<p>These are my preferred settings:
-<code>{   &quot;color_scheme&quot;: &quot;Packages/User/SublimeLinter/Monokai (SL).tmTheme&quot;,   &quot;find_selected_text&quot;: true,   &quot;folder_exclude_patterns&quot;:   [   &quot;node_modules&quot;,   &quot;.git&quot;   ],   &quot;font-size&quot;: 14,   &quot;font_size&quot;: 10,   &quot;ignored_packages&quot;:   [   &quot;Vintage&quot;   ],   &quot;sidebar_size_12&quot;: true,   &quot;status_bar_brighter&quot;: true,   &quot;tabs_small&quot;: true,   &quot;theme&quot;: &quot;Afterglow-green.sublime-theme&quot;,   &quot;trim_trailing_white_space_on_save&quot;: true,   &quot;word_wrap&quot;: false   }</code></p>
-<p>On some operating systems Sublime no longer has hot keys set for opening the project switcher. If that’s the case for you, you can add this to your User key bindings file to get your project switcher back.
-<code>[   { &quot;keys&quot;: [&quot;ctrl+alt+p&quot;], &quot;command&quot;: &quot;prompt_select_workspace&quot; }   ]</code></p>
-<p>I also like to add this to <strong><em>Packages/User/Markdown.sublime-settings</em></strong> so my markdown files have a dark theme:
-<code>{   &quot;color_scheme&quot;: &quot;Packages/MarkdownEditing/MarkdownEditor-Dark.tmTheme&quot;,   }</code></p>
-<h4 id="step-4-build-awesome-stuff">Step 4: Build awesome stuff</h4>
+<p>These are my preferred settings:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{  
+    <span style="color:#f92672">&#34;color_scheme&#34;</span>: <span style="color:#e6db74">&#34;Packages/User/SublimeLinter/Monokai (SL).tmTheme&#34;</span>,  
+    <span style="color:#f92672">&#34;find_selected_text&#34;</span>: <span style="color:#66d9ef">true</span>,  
+    <span style="color:#f92672">&#34;folder_exclude_patterns&#34;</span>:  
+    [  
+        <span style="color:#e6db74">&#34;node_modules&#34;</span>,  
+        <span style="color:#e6db74">&#34;.git&#34;</span>  
+    ],  
+    <span style="color:#f92672">&#34;font-size&#34;</span>: <span style="color:#ae81ff">14</span>,  
+    <span style="color:#f92672">&#34;font_size&#34;</span>: <span style="color:#ae81ff">10</span>,  
+    <span style="color:#f92672">&#34;ignored_packages&#34;</span>:  
+    [  
+        <span style="color:#e6db74">&#34;Vintage&#34;</span>  
+    ],  
+    <span style="color:#f92672">&#34;sidebar_size_12&#34;</span>: <span style="color:#66d9ef">true</span>,  
+    <span style="color:#f92672">&#34;status_bar_brighter&#34;</span>: <span style="color:#66d9ef">true</span>,  
+    <span style="color:#f92672">&#34;tabs_small&#34;</span>: <span style="color:#66d9ef">true</span>,  
+    <span style="color:#f92672">&#34;theme&#34;</span>: <span style="color:#e6db74">&#34;Afterglow-green.sublime-theme&#34;</span>,  
+    <span style="color:#f92672">&#34;trim_trailing_white_space_on_save&#34;</span>: <span style="color:#66d9ef">true</span>,  
+    <span style="color:#f92672">&#34;word_wrap&#34;</span>: <span style="color:#66d9ef">false</span>  
+}
+</code></pre></div><p>On some operating systems Sublime no longer has hot keys set for opening the project switcher. If that’s the case for you, you can add this to your User key bindings file to get your project switcher back.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">[  
+    { <span style="color:#f92672">&#34;keys&#34;</span>: [<span style="color:#e6db74">&#34;ctrl+alt+p&#34;</span>], <span style="color:#f92672">&#34;command&#34;</span>: <span style="color:#e6db74">&#34;prompt_select_workspace&#34;</span> }  
+]
+</code></pre></div><p>I also like to add this to <strong><em>Packages/User/Markdown.sublime-settings</em></strong> so my markdown files have a dark theme:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{  
+    <span style="color:#f92672">&#34;color_scheme&#34;</span>: <span style="color:#e6db74">&#34;Packages/MarkdownEditing/MarkdownEditor-Dark.tmTheme&#34;</span>,  
+}
+</code></pre></div><h4 id="step-4-build-awesome-stuff">Step 4: Build awesome stuff</h4>
 <p>Your text editor is now ready to help you build awesome stuff. Enjoy!</p>
 
     </div>

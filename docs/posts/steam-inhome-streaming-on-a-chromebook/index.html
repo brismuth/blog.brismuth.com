@@ -194,20 +194,36 @@ Step 1: Install Ubuntu using Crouton First off, you’ll want to install Ubuntu 
 <p><em>Note that this guide will only work on chromebooks with Intel processors.</em></p>
 <h4 id="step-1-install-ubuntu-using-crouton">Step 1: Install Ubuntu using Crouton</h4>
 <p>First off, you’ll want to install Ubuntu on your chromebook using <a href="https://github.com/dnschneid/crouton">Crouton</a>. The steps for doing that have already been covered on many blogs, so I won’t go into details there. You should be able to find a guide relatively easily with a quick google search.</p>
-<p>This is the command I used to setup my Crouton chroot:
-<code>sudo sh ~/Downloads/crouton -r trusty -t unity-desktop -t cli-extra -t audio -t keyboard</code></p>
-<h4 id="step-2-install-steam">Step 2: Install Steam</h4>
+<p>This is the command I used to setup my Crouton chroot:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo sh ~/Downloads/crouton -r trusty -t unity-desktop -t cli-extra -t audio -t keyboard
+</code></pre></div><h4 id="step-2-install-steam">Step 2: Install Steam</h4>
 <p>Once you’re in the Crouton environment, you’ll of course want to install Steam. This is very easy, you’ll just download the installer from Steam’s <a href="http://store.steampowered.com/about/">website</a> and double click it after downloading it to Ubuntu.</p>
 <h4 id="step-3-open-the-necessary-ports-on-your-firewall">Step 3: Open the necessary ports on your firewall</h4>
-<p>ChromeOS by default blocks the ports that Steam uses for in-home streaming. You can change that easily with iptables in your terminal, which you can open with ctrl+alt+t:
-<code>sudo apt-get install iptables;   sudo iptables -A INPUT -p udp --dport 27036 -j ACCEPT;    sudo iptables -A INPUT -p udp --dport 37804 -j ACCEPT;    sudo iptables -A INPUT -p tcp --dport 37804 -j ACCEPT;    sudo iptables -A INPUT -p tcp --dport 27036 -j ACCEPT;    sudo iptables -I INPUT -p udp --dport 27031 -j ACCEPT;    sudo iptables -I INPUT -p udp --dport 27036 -j ACCEPT;    sudo iptables -I INPUT -p tcp --dport 27036 -j ACCEPT;    sudo iptables -I INPUT -p tcp --dport 27037 -j ACCEPT;</code></p>
-<p>You will need to run the iptables commands every time you want to use Steam In-Home Streaming, after each reboot. An easy way to do this is to add a <a href="http://www.tldp.org/LDP/abs/html/aliases.html">bash alias</a> for them:
-<code>echo &quot;alias steamStream=&amp;#39;   sudo iptables -A INPUT -p udp --dport 27036 -j ACCEPT;    sudo iptables -A INPUT -p udp --dport 37804 -j ACCEPT;    sudo iptables -A INPUT -p tcp --dport 37804 -j ACCEPT;    sudo iptables -A INPUT -p tcp --dport 27036 -j ACCEPT;    sudo iptables -I INPUT -p udp --dport 27031 -j ACCEPT;    sudo iptables -I INPUT -p udp --dport 27036 -j ACCEPT;    sudo iptables -I INPUT -p tcp --dport 27036 -j ACCEPT;    sudo iptables -I INPUT -p tcp --dport 27037 -j ACCEPT;&amp;#39;&quot; &amp;gt;&amp;gt; ~/.bash_aliases</code></p>
-<p>Now, each time you reboot, you’ll just need to open your terminal, and type steamStream to open the necessary ports for streaming.</p>
+<p>ChromeOS by default blocks the ports that Steam uses for in-home streaming. You can change that easily with iptables in your terminal, which you can open with ctrl+alt+t:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get install iptables;  
+sudo iptables -A INPUT -p udp --dport <span style="color:#ae81ff">27036</span> -j ACCEPT;   
+sudo iptables -A INPUT -p udp --dport <span style="color:#ae81ff">37804</span> -j ACCEPT;   
+sudo iptables -A INPUT -p tcp --dport <span style="color:#ae81ff">37804</span> -j ACCEPT;   
+sudo iptables -A INPUT -p tcp --dport <span style="color:#ae81ff">27036</span> -j ACCEPT;   
+sudo iptables -I INPUT -p udp --dport <span style="color:#ae81ff">27031</span> -j ACCEPT;   
+sudo iptables -I INPUT -p udp --dport <span style="color:#ae81ff">27036</span> -j ACCEPT;   
+sudo iptables -I INPUT -p tcp --dport <span style="color:#ae81ff">27036</span> -j ACCEPT;   
+sudo iptables -I INPUT -p tcp --dport <span style="color:#ae81ff">27037</span> -j ACCEPT;
+</code></pre></div><p>You will need to run the iptables commands every time you want to use Steam In-Home Streaming, after each reboot. An easy way to do this is to add a <a href="http://www.tldp.org/LDP/abs/html/aliases.html">bash alias</a> for them:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">echo <span style="color:#e6db74">&#34;alias steamStream=&#39;  
+</span><span style="color:#e6db74">sudo iptables -A INPUT -p udp --dport 27036 -j ACCEPT;   
+</span><span style="color:#e6db74">sudo iptables -A INPUT -p udp --dport 37804 -j ACCEPT;   
+</span><span style="color:#e6db74">sudo iptables -A INPUT -p tcp --dport 37804 -j ACCEPT;   
+</span><span style="color:#e6db74">sudo iptables -A INPUT -p tcp --dport 27036 -j ACCEPT;   
+</span><span style="color:#e6db74">sudo iptables -I INPUT -p udp --dport 27031 -j ACCEPT;   
+</span><span style="color:#e6db74">sudo iptables -I INPUT -p udp --dport 27036 -j ACCEPT;   
+</span><span style="color:#e6db74">sudo iptables -I INPUT -p tcp --dport 27036 -j ACCEPT;   
+</span><span style="color:#e6db74">sudo iptables -I INPUT -p tcp --dport 27037 -j ACCEPT;&#39;&#34;</span> &gt;&gt; ~/.bash_aliases
+</code></pre></div><p>Now, each time you reboot, you’ll just need to open your terminal, and type steamStream to open the necessary ports for streaming.</p>
 <h4 id="step-4-start-streaming">Step 4: Start streaming!</h4>
 <p>Open or restart your Steam client in Crouton, and you will see the option to stream from your other computers on your local network.</p>
 <p><img src="/posts/steam-inhome-streaming-on-a-chromebook/images/1.png" alt="image">
-Ready to stream on ChromeOS</p>
+<em>Ready to stream on ChromeOS</em></p>
 <p>Questions or comments? Let me know below!</p>
 
     </div>

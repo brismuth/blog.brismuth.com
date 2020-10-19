@@ -196,15 +196,16 @@ The way our VPN is currently configured, our laptops do not keep the same intern
 <p>SSHFS has a lot of different options, and you can read about them in the man page. You can also find detailed benchmarks for a variety of options at <a href="http://www.admin-magazine.com/HPC/Articles/Sharing-Data-with-SSHFS">http://www.admin-magazine.com/HPC/Articles/Sharing-Data-with-SSHFS</a>. After reading that article and experimenting some on my own, I typically use the options kernel_cache,cache=yes,compression=no. With these options enabled, performance ends up being very comparable to NFS. It’s not nearly as fast as having the code locally, but in my experience it is plenty for software development.</p>
 <h4 id="how-do-i-use-it">How do I use it?</h4>
 <p><strong>Installation:</strong> If you are on OS X, I recommend using <a href="http://brew.sh/">brew</a>. There is also a package for it in apt-get if you are using Ubuntu. SSHFS has also been ported to Windows, but I won’t be covering that here.</p>
-<p>Once you’ve got SSHFS installed, using it is pretty straightforward. Simply run it from your client machine as follows:
-<code>sshfs -o kernel_cache,cache=yes,compression=no user@host:/path/to/remote/folder /path/to/local/folder</code></p>
-<p>Hooray! You can now access /path/to/local/folder as if it were a local directory.</p>
-<p>When you are finished with the mount, you can unmount it like so:
-<code>umount /path/to/local/folder</code></p>
-<p>If the unmount fails, make sure that no processes are currently using that directory, including text editors and terminals.</p>
-<p>If you regularly use these mounts, it would probably make sense to add them as bash aliases so you can quickly and easily manage them. You can do that by adding the commands to your ~/.bash_profile like this:
-<code>alias mountCode=&amp;#39;sshfs -o kernel_cache,cache=yes,compression=no user@host:/path/to/remote/folder /path/to/local/folder&amp;#39;   alias unmountCode=&amp;#39;umount /path/to/local/folder&amp;#39;</code></p>
-<p>After starting a new terminal session, you will now be able to simply type mountCode or unmountCode to manage your SSHFS mount.</p>
+<p>Once you’ve got SSHFS installed, using it is pretty straightforward. Simply run it from your client machine as follows:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sshfs -o kernel_cache,cache<span style="color:#f92672">=</span>yes,compression<span style="color:#f92672">=</span>no user@host:/path/to/remote/folder /path/to/local/folder
+</code></pre></div><p>Hooray! You can now access <code>/path/to/local/folder</code> as if it were a local directory.</p>
+<p>When you are finished with the mount, you can unmount it like so:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">umount /path/to/local/folder
+</code></pre></div><p>If the unmount fails, make sure that no processes are currently using that directory, including text editors and terminals.</p>
+<p>If you regularly use these mounts, it would probably make sense to add them as bash aliases so you can quickly and easily manage them. You can do that by adding the commands to your ~/.bash_profile like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">alias mountCode<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;sshfs -o kernel_cache,cache=yes,compression=no user@host:/path/to/remote/folder /path/to/local/folder&#39;</span>  
+alias unmountCode<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;umount /path/to/local/folder&#39;</span>
+</code></pre></div><p>After starting a new terminal session, you will now be able to simply type mountCode or unmountCode to manage your SSHFS mount.</p>
 <h4 id="limitations">Limitations</h4>
 <p>Although SSHFS works in more situations than NFS, it isn’t quite as user-friendly. There are a couple things to keep in mind:</p>
 <ol>
