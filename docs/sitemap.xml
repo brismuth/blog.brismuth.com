@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://blog.brismuth.com/</loc>
+    <lastmod>2020-10-18T16:10:33-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brismuth.com/drafts/</loc>
+    <lastmod>2020-10-18T16:10:33-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brismuth.com/drafts/draft__how-to-build-a-chrome-extension-to-automate-stuff/</loc>
+    <lastmod>2020-10-18T16:10:33-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brismuth.com/drafts/draft__how-to-build-a-very-cheap-but-awesome-home-server/</loc>
+    <lastmod>2020-10-18T16:10:33-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brismuth.com/drafts/draft__sending-email-through-your-gmail-account-from-your-linux-server/</loc>
+    <lastmod>2020-10-18T16:10:33-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brismuth.com/drafts/draft__one-book-that-every-software-developer-should-read/</loc>
+    <lastmod>2020-10-18T16:10:33-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brismuth.com/drafts/draft__using-a-nonproject-fi-phone-on-project-fi/</loc>
+    <lastmod>2020-10-18T16:10:33-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brismuth.com/posts/how-to-install-steam-on-a-chromebook/</loc>
+    <lastmod>2020-10-18T16:10:33-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brismuth.com/posts/</loc>
+    <lastmod>2020-10-18T16:10:33-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brismuth.com/posts/how-to-use-chrome-oss-native-samba-client/</loc>
+    <lastmod>2020-10-18T16:10:33-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brismuth.com/posts/how-to-send-bulk-texts-with-google-voice/</loc>
+    <lastmod>2020-10-18T16:10:33-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brismuth.com/posts/securing-your-baby-monitor/</loc>
+    <lastmod>2020-10-18T16:10:33-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brismuth.com/posts/zfs-on-linux-vs-windows-storage-spaces-with-refs/</loc>
+    <lastmod>2020-10-18T16:10:32-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brismuth.com/posts/get-a-kindle-paperwhite-for-super-cheap/</loc>
+    <lastmod>2020-10-18T16:10:32-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brismuth.com/posts/scheduling-automated-storage-health-checks/</loc>
+    <lastmod>2020-10-18T16:10:32-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brismuth.com/posts/scheduling-automated-zfs-scrubs/</loc>
+    <lastmod>2020-10-18T16:10:32-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brismuth.com/posts/configuring-sublime-text-to-be-awesome/</loc>
+    <lastmod>2020-10-18T16:10:32-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brismuth.com/posts/why-my-blog-is-on-medium/</loc>
+    <lastmod>2020-10-18T16:10:32-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brismuth.com/about/</loc>
+    <lastmod>2020-10-18T16:10:32-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brismuth.com/posts/steam-inhome-streaming-on-a-chromebook/</loc>
+    <lastmod>2020-10-18T16:10:31-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brismuth.com/posts/installing-adb-on-mac-os-x/</loc>
+    <lastmod>2020-10-18T16:10:31-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brismuth.com/posts/caret-vs-zed/</loc>
+    <lastmod>2020-10-18T16:10:31-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brismuth.com/posts/writing-code-remotely-with-sshfs/</loc>
+    <lastmod>2020-10-18T16:10:31-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brismuth.com/categories/</loc>
+  </url>
+  
+  <url>
+    <loc>https://blog.brismuth.com/tags/</loc>
+  </url>
+  
+</urlset>
