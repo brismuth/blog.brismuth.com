@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+      <title>
+        ZFS on Linux vs Windows Storage Spaces with ReFS ::
+        Hello Friend — A simple theme for Hugo
+      </title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta
+  name="description"
+  content="Choosing the right file system for your server Did you know that over time, your saved files can change and become corrupt, with absolutely no interaction on your part? All of our current storage mediums are susceptible; hard drive bits can lose their magnetic orientation and bits stored on solid state drives can slowly lose their electric charge. It’s commonly referred to as data decay, and Xkcd actually has a comic that jokes about the phenomenon offhandedly:"
+/>
+<meta
+  name="keywords"
+  content=""
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://blog.brismuth.com/posts/zfs-on-linux-vs-windows-storage-spaces-with-refs/" />
+
+
+
+
+
+<link rel="stylesheet" href="https://blog.brismuth.com/assets/style.css" />
+
+<link rel="stylesheet" href="https://blog.brismuth.com/style.css" />
+
+
+<link
+  rel="apple-touch-icon-precomposed"
+  sizes="144x144"
+  href="https://blog.brismuth.com/img/apple-touch-icon-144-precomposed.png"
+/>
+<link rel="shortcut icon" href="https://blog.brismuth.com/img/favicon.png" />
+
+
+<link href="https://blog.brismuth.com/assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://blog.brismuth.com/assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://blog.brismuth.com/assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://blog.brismuth.com/assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://blog.brismuth.com/assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://blog.brismuth.com/assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://blog.brismuth.com/posts/zfs-on-linux-vs-windows-storage-spaces-with-refs/images/1.png"/>
+
+<meta name="twitter:title" content="ZFS on Linux vs Windows Storage Spaces with ReFS"/>
+<meta name="twitter:description" content="Choosing the right file system for your server Did you know that over time, your saved files can change and become corrupt, with absolutely no interaction on your part? All of our current storage mediums are susceptible; hard drive bits can lose their magnetic orientation and bits stored on solid state drives can slowly lose their electric charge. It’s commonly referred to as data decay, and Xkcd actually has a comic that jokes about the phenomenon offhandedly:"/>
+
+
+
+<meta property="og:title" content="ZFS on Linux vs Windows Storage Spaces with ReFS" />
+<meta property="og:description" content="Choosing the right file system for your server Did you know that over time, your saved files can change and become corrupt, with absolutely no interaction on your part? All of our current storage mediums are susceptible; hard drive bits can lose their magnetic orientation and bits stored on solid state drives can slowly lose their electric charge. It’s commonly referred to as data decay, and Xkcd actually has a comic that jokes about the phenomenon offhandedly:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.brismuth.com/posts/zfs-on-linux-vs-windows-storage-spaces-with-refs/" />
+<meta property="og:image" content="https://blog.brismuth.com/posts/zfs-on-linux-vs-windows-storage-spaces-with-refs/images/1.png" />
+<meta property="article:published_time" content="2017-01-16T05:21:45+00:00" />
+<meta property="article:modified_time" content="2020-10-18T16:10:32-06:00" /><meta property="og:site_name" content="Hello Friend" />
+
+
+
+
+
+
+  </head>
+  <body class="dark-theme">
+    <div class="container">
+      <header class="header">
+  <span class="header__inner">
+    <a
+  href="/"
+  class="logo"
+  style="text-decoration: none;"
+>
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44">
+  <path fill="none" d="M15 8l14.729 14.382L15 35.367" />
+</svg>
+</span>
+    <span class="logo__text"
+      >hello friend</span
+    >
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+        
+          <li><a href="/showcase">Showcase</a></li>
+        
+      
+      
+      
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/about">About</a></li>
+      
+    
+      
+        <li><a href="/showcase">Showcase</a></li>
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg
+  class="theme-toggler"
+  width="24"
+  height="24"
+  viewBox="0 0 48 48"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"
+  />
+</svg>
+
+      </span>
+    </span>
+  </span>
+</header>
+
+
+      <div class="content">
+        
+  
+  
+
+  <div class="post">
+    <h1 class="post-title">ZFS on Linux vs Windows Storage Spaces with ReFS</h1>
+    <div class="post-meta">
+      
+        <span class="post-date">
+          2017-01-16
+        </span>
+
+        
+          
+        
+      
+
+      
+        <span class="post-author"
+          >— Written by Brian Smith</span
+        >
+
+
+      
+    </div>
+
+    
+
+    
+
+    <div class="post-content">
+      
+      <h4 id="choosing-the-right-file-system-for-your-server">Choosing the right file system for your server</h4>
+<p>Did you know that over time, your saved files can change and become corrupt, with absolutely no interaction on your part? All of our current storage mediums are susceptible; hard drive bits can lose their magnetic orientation and bits stored on solid state drives can slowly lose their electric charge. It’s commonly referred to as <a href="https://en.wikipedia.org/wiki/Data_degradation">data decay</a>, and Xkcd actually has a comic that jokes about the phenomenon offhandedly:</p>
+<p><img src="/posts/zfs-on-linux-vs-windows-storage-spaces-with-refs/images/1.png" alt="image">
+<a href="http://xkcd.com/378/">http://xkcd.com/378/</a></p>
+<p>I’m a bit paranoid when it comes to my data (family pictures and videos, legal documents, etc), so I’m not okay with my stuff being susceptible to data decay. Luckily, there are some options to protect yourself from it. I’ll dive into some of the strengths and weaknesses of two <a href="https://en.wikipedia.org/wiki/File_system">file systems</a> that actively prevent data decay—ZFS and ReFS.</p>
+<h4 id="but-first-a-note-about-ecc-ram">But first, a note about ECC ram</h4>
+<p>Regardless of what file system you’re using, if you care about data integrity, you want to be using ECC ram. It is estimated that <a href="https://blogs.oracle.com/ksplice/entry/attack_of_the_cosmic_rays1">computers experience 1 random bit flip per 4gb of ram per day</a>. If you have 16gb of ram on your file server, that means you’re likely to experience random bits flipping 4 times every day. This can cause problems at all levels of your system and can negate many of the benefits of ZFS and ReFS. The Oracle blog has a <a href="https://blogs.oracle.com/ksplice/entry/attack_of_the_cosmic_rays1">fantastic post</a> on this topic. Using ECC ram has been shown to almost entirely eliminate these errors.</p>
+<p>Now then, on to the file systems.</p>
+<h4 id="zfs-background">ZFS background</h4>
+<p><a href="https://en.wikipedia.org/wiki/ZFS">ZFS originally started as a Sun Microsystems project</a> for their operating system Solaris. It was made open source in 2005 with the OpenSolaris project. In 2010 Sun Microsystems was aquired by Oracle, and they decided to make their future development on ZFS closed source. <a href="http://open-zfs.org/wiki/Main_Page">In 2013 OpenZFS was announced</a> as the open source successor to ZFS. One of its major efforts included porting ZFS to Linux in a project called <a href="https://github.com/zfsonlinux/zfs/">ZFS on Linux</a>. Finally, in April 2016, ZFS on Linux was considered stable enough that it <a href="https://wiki.ubuntu.com/ZFS">began to be included in default installations of Ubuntu</a>.</p>
+<h4 id="storage-spaces-background">Storage Spaces background</h4>
+<p>Microsoft previously had a product called Windows Home Server, which had something called Drive Extender. Drive Extender basically allowed you to combine multiple hard drives into a single logical mounting point. Windows Home Server was never a particularly popular product, and they eventually cancelled both products. Windows Storage Spaces is the successor to Drive Extender, and adds a lot of useful functionality to it.</p>
+<h3 id="finally-the-comparison">Finally, the comparison</h3>
+<p>Let’s compare the pros and cons of ZFS and Windows Storage Spaces across a few different categories that would be important to an average user.</p>
+<h4 id="support">Support</h4>
+<p>One of the major pros to using ZFS on Linux is that it is open source. Because of that there is a great support community for it. If you are having any issues or needing to recover a failed drive, you’ll be much more able to find instructions and tools for ZFS than for Windows. As long as Windows Storage Spaces and ReFS remain closed source, it won’t be easy for 3rd party application developers to build support or recovery tools for it.</p>
+<p>ZFS wins this category.</p>
+<h4 id="automation-and-control">Automation and control</h4>
+<p>There are some really useful things you can automate if you’re using ZFS and Linux. For example:</p>
+<ul>
+<li><a href="https://brismuth.com/scheduling-automated-storage-health-checks-d470b4283e3e#.pxry3mskr">regularly running storage hardware health checks</a></li>
+<li><a href="https://brismuth.com/scheduling-automated-zfs-scrubs-9b2b452e08a4#.d2qf7085i">regularly running ZFS scrubs</a></li>
+<li>emailing yourself the results of each of those tests</li>
+<li>automated backups to cloud storage</li>
+</ul>
+<p>On the other hand, with Windows Storage Spaces, you have no control over when the ReFS scrubs occur. There are <a href="http://bakins-bits.com/wordpress/?p=195">multiple reports</a> of this interfering with performance in the rest of your applications. You can schedule hardware healthchecks and backups, but neither of those are as straightforward to configure on Windows as they are on Linux.</p>
+<p>ZFS wins here as well.</p>
+<h4 id="portability">Portability</h4>
+<p>ZFS is supported on a <a href="https://en.wikipedia.org/wiki/ZFS#List_of_operating_systems_supporting_ZFS">variety of operating systems</a> including Linux, which is free and can be installed on almost any computer. It is fairly trivial to move an existing ZFS pool to a different machine that supports ZFS.</p>
+<p>Windows Storage Spaces is available on Windows 8 (Home and Pro) and above and on Windows Server 2012 and above. The majority of pre-built computers come with Windows 10 Home already installed, so chances are good that your computer supports Storage Spaces. It is also extremely trivial to move an existing Storage Spaces pool to another Windows machine that supports it.</p>
+<p>I’m calling this one a tie. If I had to pick one, it would again be ZFS because Linux is free and installable on almost any hardware.</p>
+<p><strong>Update 8/17/2017</strong>— Microsoft has announced that it will be <a href="https://support.microsoft.com/en-us/help/4034825/features-that-are-removed-or-deprecated-in-windows-10-fall-creators-up">deprecating the ability to create ReFS pools</a> in all Windows editions except for Windows 10 Enterprise and Windows 10 Pro for Workstations.</p>
+<h4 id="system-requirements">System requirements</h4>
+<p>While Microsoft <a href="https://technet.microsoft.com/en-us/library/hh831739%28v=ws.11%29.aspx#Anchor_4">neglects to mention</a> any specific memory requirements to use Storage Spaces, ZFS is notorious for needing a lot of memory. The FreeBSD wiki recommends <a href="https://wiki.freebsd.org/ZFSTuningGuide">at <strong>least</strong> 1GB of ram per TB of storage</a>.</p>
+<p>If you don’t have the budget for that much ram, Windows Storage Spaces is probably a better choice for you. You won’t get the performance that a ZFS RAID-Z with sufficient ram would offer, but you probably don’t need that kind of performance for a home file server anyway.</p>
+<h4 id="ease-of-configuration">Ease of configuration</h4>
+<p>ZFS has been built into Ubuntu starting with 16.04, but you’ll still need to be familiar with the command line and do some reading to configure a storage pool. Getting your environment set up initially can be a bit of a challenge if it’s your first time.</p>
+<p>On the other hand, Windows 10 offers a very simple GUI to configure and manage your Storage Spaces pool. It is also significantly easier to set up folders from your storage pool to be shared over your home network in Windows.</p>
+<p>Additionally, if you’re working with RAID configurations more complex than simple mirrors (i.e. striping and parity) it is <a href="http://louwrentius.com/the-hidden-cost-of-using-zfs-for-your-home-nas.html">significantly more difficult to add new disks with ZFS</a>. On the other hand, Storage Spaces is very flexible with adding new disks of any size or shape.</p>
+<p>Windows Storage Spaces definitely wins this category.</p>
+<h4 id="desktop-usage">Desktop usage</h4>
+<p>If you are planning on doubling the use of your file server as a desktop or gaming machine, Windows is likely a better choice for you. It has a much wider range of software available and much better support for video games.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>If you want complete control and visibility into your file system, ZFS is the better choice. If you want a largely hands off experience or want to use your computer as a desktop as well, Windows Storage Spaces may be a better choice for you. Ultimately it comes down to what’s most important to you.</p>
+<p>Questions or comments? Let me know below!<em>Updated 10/7/2017</em></p>
+
+    </div>
+    
+      
+        <div class="pagination">
+          <div class="pagination__title">
+            <span class="pagination__title-h"
+              >Read other posts</span
+            >
+            <hr />
+          </div>
+          <div class="pagination__buttons">
+            
+              <span class="button previous">
+                <a href="https://blog.brismuth.com/posts/securing-your-baby-monitor/">
+                  <span class="button__icon">←</span>
+                  <span class="button__text">Securing your baby monitor</span>
+                </a>
+              </span>
+            
+            
+              <span class="button next">
+                <a href="https://blog.brismuth.com/posts/get-a-kindle-paperwhite-for-super-cheap/">
+                  <span class="button__text">Get a Kindle Paperwhite for super cheap</span>
+                  <span class="button__icon">→</span>
+                </a>
+              </span>
+            
+          </div>
+        </div>
+      
+    
+
+    
+      
+        
+
+      
+    
+  </div>
+
+      </div>
+
+      
+        <footer class="footer">
+  <div class="footer__inner">
+    
+      <a
+  href="/"
+  class="logo"
+  style="text-decoration: none;"
+>
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44">
+  <path fill="none" d="M15 8l14.729 14.382L15 35.367" />
+</svg>
+</span>
+    <span class="logo__text"
+      >hello friend</span
+    >
+    <span class="logo__cursor"></span>
+  
+</a>
+
+      <div class="copyright">
+        <span
+          >© 2020 Powered by
+          <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a></span
+        >
+        <span
+          >Theme created by
+          <a href="https://twitter.com/panr" target="_blank" rel="noopener">panr</a></span
+        >
+      </div>
+    
+  </div>
+</footer>
+
+<script src="https://blog.brismuth.com/assets/main.js"></script>
+<script src="https://blog.brismuth.com/assets/prism.js"></script>
+
+
+      
+    </div>
+
+    
+  </body>
+</html>

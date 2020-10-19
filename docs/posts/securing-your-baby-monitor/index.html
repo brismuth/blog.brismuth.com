@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+      <title>
+        Securing your baby monitor ::
+        Hello Friend — A simple theme for Hugo
+      </title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta
+  name="description"
+  content="Ensuring that (only) you have secure remote access to your home IP camera It’s something every parent with a baby monitor fears. There have been multiple cases where people have had their monitoring devices “hacked” by strangers. There’s this story where a couple found a stranger talking to their 3 year old through the camera in his room. Here’s seven more examples of it happening in a BuzzFeed story.
+Yikes! What can you do?"
+/>
+<meta
+  name="keywords"
+  content=""
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://blog.brismuth.com/posts/securing-your-baby-monitor/" />
+
+
+
+
+
+<link rel="stylesheet" href="https://blog.brismuth.com/assets/style.css" />
+
+<link rel="stylesheet" href="https://blog.brismuth.com/style.css" />
+
+
+<link
+  rel="apple-touch-icon-precomposed"
+  sizes="144x144"
+  href="https://blog.brismuth.com/img/apple-touch-icon-144-precomposed.png"
+/>
+<link rel="shortcut icon" href="https://blog.brismuth.com/img/favicon.png" />
+
+
+<link href="https://blog.brismuth.com/assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://blog.brismuth.com/assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://blog.brismuth.com/assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://blog.brismuth.com/assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://blog.brismuth.com/assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://blog.brismuth.com/assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://blog.brismuth.com/posts/securing-your-baby-monitor/images/1.png"/>
+
+<meta name="twitter:title" content="Securing your baby monitor"/>
+<meta name="twitter:description" content="Ensuring that (only) you have secure remote access to your home IP camera It’s something every parent with a baby monitor fears. There have been multiple cases where people have had their monitoring devices “hacked” by strangers. There’s this story where a couple found a stranger talking to their 3 year old through the camera in his room. Here’s seven more examples of it happening in a BuzzFeed story.
+Yikes! What can you do?"/>
+
+
+
+<meta property="og:title" content="Securing your baby monitor" />
+<meta property="og:description" content="Ensuring that (only) you have secure remote access to your home IP camera It’s something every parent with a baby monitor fears. There have been multiple cases where people have had their monitoring devices “hacked” by strangers. There’s this story where a couple found a stranger talking to their 3 year old through the camera in his room. Here’s seven more examples of it happening in a BuzzFeed story.
+Yikes! What can you do?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.brismuth.com/posts/securing-your-baby-monitor/" />
+<meta property="og:image" content="https://blog.brismuth.com/posts/securing-your-baby-monitor/images/1.png" />
+<meta property="og:image" content="https://blog.brismuth.com/posts/securing-your-baby-monitor/images/2.png" />
+<meta property="og:image" content="https://blog.brismuth.com/posts/securing-your-baby-monitor/images/3.jpeg" />
+<meta property="article:published_time" content="2017-05-21T00:46:01+00:00" />
+<meta property="article:modified_time" content="2020-10-18T16:10:33-06:00" /><meta property="og:site_name" content="Hello Friend" />
+
+
+
+
+
+
+  </head>
+  <body class="dark-theme">
+    <div class="container">
+      <header class="header">
+  <span class="header__inner">
+    <a
+  href="/"
+  class="logo"
+  style="text-decoration: none;"
+>
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44">
+  <path fill="none" d="M15 8l14.729 14.382L15 35.367" />
+</svg>
+</span>
+    <span class="logo__text"
+      >hello friend</span
+    >
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+        
+          <li><a href="/showcase">Showcase</a></li>
+        
+      
+      
+      
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/about">About</a></li>
+      
+    
+      
+        <li><a href="/showcase">Showcase</a></li>
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg
+  class="theme-toggler"
+  width="24"
+  height="24"
+  viewBox="0 0 48 48"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"
+  />
+</svg>
+
+      </span>
+    </span>
+  </span>
+</header>
+
+
+      <div class="content">
+        
+  
+  
+
+  <div class="post">
+    <h1 class="post-title">Securing your baby monitor</h1>
+    <div class="post-meta">
+      
+        <span class="post-date">
+          2017-05-21
+        </span>
+
+        
+          
+        
+      
+
+      
+        <span class="post-author"
+          >— Written by Brian Smith</span
+        >
+
+
+      
+    </div>
+
+    
+
+    
+
+    <div class="post-content">
+      
+      <h4 id="ensuring-that-only-you-have-secure-remote-access-to-your-home-ip-camera">Ensuring that (only) you have secure remote access to your home IP camera</h4>
+<p>It’s something every parent with a baby monitor fears. There have been multiple cases where people have had their monitoring devices “hacked” by strangers. There’s <a href="http://www.cbsnews.com/news/baby-monitor-hacker-delivers-creepy-message-to-child/">this story</a> where a couple found a stranger talking to their 3 year old through the camera in his room. Here’s <a href="https://www.buzzfeed.com/craigsilverman/creeps-hack-baby-monitors-and-say-terrifying-thing?utm_term=.fgrXO1Jm8j#.ovNKnZ1o9x">seven more examples</a> of it happening in a BuzzFeed story.</p>
+<h4 id="yikes-what-can-you-do">Yikes! What can you do?</h4>
+<p>One of the most basic things you can do to secure your baby monitor is choose a good password. Never, never, <em>never</em> leave the default password set for your baby monitor (or for anything, while you’re at it). However, the password you pick can only go so far. There are certain things that a good password can’t help:</p>
+<ul>
+<li>Out of date web server technology built into the baby camera (this is a common problem with embedded systems like IP cameras)</li>
+<li>Password limitations on the baby camera (for example, mine only allows passwords up to 12 characters)</li>
+<li>Lack of support for encrypted connection to the baby camera (SSL/HTTPS)</li>
+</ul>
+<p>To solve all of the above problems, I’m going to show you how to set up a reverse proxy using nginx on your home server, which will allow you secure, encrypted remote access to your IP camera. Here’s a top level view of what this covers:</p>
+<ul>
+<li>Finding a place to run your proxy</li>
+<li>Getting an SSL cert with Let’s Encrypt</li>
+<li>Configuring nginx as a basic encrypted reverse proxy</li>
+<li>Adding HTTP basic auth credentials to your encrypted proxy</li>
+<li>Configuring nginx to correctly override your authentication headers as packets are forwarded through it to the camera</li>
+</ul>
+<h4 id="where-to-install-the-proxy">Where to install the proxy</h4>
+<p>A <a href="https://en.wikipedia.org/wiki/Reverse_proxy">reverse proxy</a> is basically a server that goes between a client and another server, which is why it’s called a proxy. To start, you’ll need a device that supports nginx. If you have an old computer you can install Linux on it. If you have a Windows computer that you’re OK having always on, you could run a Linux virtual machine on it. If neither of those options work, you can also buy a <a href="https://www.raspberrypi.org/products/pi-zero/">Raspberry Pi Zero</a> and <a href="https://www.raspberrypi.org/documentation/remote-access/web-server/nginx.md">install nginx on it</a>. After you’ve set up your device, you’ll want to <a href="http://www.wikihow.com/Set-Up-Port-Forwarding-on-a-Router">forward port 443 from your router</a> to the IP address of the device you chose. It would be helpful to also set a static IP address on that device at this time.</p>
+<h4 id="ssl">SSL</h4>
+<p>The way most baby monitors handle authentication is via <a href="https://en.wikipedia.org/wiki/Basic_access_authentication">HTTP basic auth</a>. This protocol requires that your browser send your username and password with every single request. If this is happening over an HTTP connection, than any attacker with access to any network between your browser and your camera will have the ability to <em>steal your camera credentials</em>. In order for your camera to be safe, your connection to the proxy will need to be encrypted.</p>
+<p>Fortunately, getting an SSL certificate is now easier than ever thanks to <a href="https://letsencrypt.org/">Let’s Encrypt</a>. You’ll need a DNS name pointing at your home IP address if you want the SSL cert to work without any errors. In a future post I’ll add more details about how to set that up, but for now you’ll hopefully be able to find the guides you need on the Let’s Encrypt site. If you need dynamic DNS for this, you should be able to find a free provider online, such as <a href="https://www.noip.com/">https://www.noip.com/</a>.</p>
+<h4 id="nginx">Nginx</h4>
+<p>Finally it’s time to configure the nginx server. For a basic setup with SSL, this is all you need:
+<code>server {     listen 443 ssl;   server_name myhomedomain.com;``        ssl_certificate /path/to/your/openssl.pem;   ssl_certificate_key /path/to/your/openssl.key;``        location /camera/ {   proxy_pass [http://192.168.1.146:80/;](http://192.168.1.146:80/;)   }   }</code></p>
+<ol>
+<li>Replace myhomedomain.com with the DNS address you have pointing at your home IP</li>
+<li>Replace the SSL cert paths with the path you got from Let’s Encrypt.</li>
+<li>Replace the IP address in the location block with that of your IP camera.</li>
+<li>Copy the file into the sites-enabled directory for nginx (<code>/etc/nginx/sites-enabled/</code> on Ubuntu)</li>
+<li>Restart nginx</li>
+<li>You should now be able to go to <a href="https://myhomedomain.com/camera">https://myhomedomain.com/camera</a> and see your camera. If your camera is configured with HTTP basic auth, it will show a popup like this:
+<img src="/posts/securing-your-baby-monitor/images/1.png" alt="image">
+The HTTP auth for my home camera</li>
+</ol>
+<p>At this point you should be able to login and view your camera through the SSL proxy using the credentials you originally set up on your camera.</p>
+<h4 id="additional-security-with-a-better-password">Additional security with a better password</h4>
+<p>As I mentioned before, my camera limits me to 12 character passwords. That’s an atrocious length for a password that’s open to the world and susceptible to brute forcing. Fortunately, now that the nginx proxy is set up, we can improve that. First we’ll want to generate HTTP basic auth credentials of our own on the new server. Assuming Ubuntu:
+<code>sudo -i   apt-get install nginx apache2-utils   htpasswd -c /etc/nginx/.htpasswd admin</code></p>
+<p>After following the prompt, you will have a new credentials file called <code>.htpasswd</code>. The user will be “admin” and the password will be the one you typed in. I recommend making a long, random password using a password manager like LastPass. Mine is around 100 characters. Now you just need to add a few lines to your nginx config to use the authentication. Add these two lines inside your main server block:
+<code>auth_basic &amp;#34;Restricted&amp;#34;;   auth_basic_user_file /etc/nginx/.htpasswd;</code></p>
+<p>If your camera also uses HTTP basic authentication (like mine does), you’ll have to handle that now. Otherwise, your camera will not accept the HTTP auth header that your browser sends to the nginx proxy. You can do that by adding a line similar to this one inside your /camera/ location block:
+<code>proxy_set_header Authorization &amp;#34;Basic YWRtaW46ZmFrZXBhc3N3b3Jk&amp;#34;;</code></p>
+<p>Replace the long string after “Basic” with the “username:password” your IP camera uses, base64 encoded. An easy way to get the string is by using the Chrome network inspector:</p>
+<ol>
+<li>In Chrome, open the developer tools</li>
+<li>Click on the Network tab</li>
+<li>Click “Preserve log”</li>
+<li>Go to the URL of your IP camera on the local network (not the DNS name we just set up)</li>
+<li>Login with the original credentials for your camera (not the ones we just created)</li>
+<li>Look at headers for any request in your network tab that is going to the IP camera. You’ll see something like this:
+<img src="/posts/securing-your-baby-monitor/images/2.png" alt="image">
+“YWRtaW46ZmFrZXBhc3N3b3Jk” is <code>admin:fakepassword</code>, base64 encoded</li>
+</ol>
+<p>Your character string will be significantly longer if you chose a long password. Go ahead and copy that character string and put it into your nginx config, then restart nginx again.</p>
+<p>You should now be able to go to <a href="https://myhomedomain.com/camera">https://myhomedomain.com/camera</a> and sign in using the new credentials you generated. Now that you’re using a ~100 character password over SSL, your camera is significantly safer from the bad guys. Whew!</p>
+<p><img src="/posts/securing-your-baby-monitor/images/3.jpeg" alt="image">
+Nap time!</p>
+
+    </div>
+    
+      
+        <div class="pagination">
+          <div class="pagination__title">
+            <span class="pagination__title-h"
+              >Read other posts</span
+            >
+            <hr />
+          </div>
+          <div class="pagination__buttons">
+            
+              <span class="button previous">
+                <a href="https://blog.brismuth.com/posts/how-to-send-bulk-texts-with-google-voice/">
+                  <span class="button__icon">←</span>
+                  <span class="button__text">How to send bulk texts with Google voice</span>
+                </a>
+              </span>
+            
+            
+              <span class="button next">
+                <a href="https://blog.brismuth.com/posts/zfs-on-linux-vs-windows-storage-spaces-with-refs/">
+                  <span class="button__text">ZFS on Linux vs Windows Storage Spaces with ReFS</span>
+                  <span class="button__icon">→</span>
+                </a>
+              </span>
+            
+          </div>
+        </div>
+      
+    
+
+    
+      
+        
+
+      
+    
+  </div>
+
+      </div>
+
+      
+        <footer class="footer">
+  <div class="footer__inner">
+    
+      <a
+  href="/"
+  class="logo"
+  style="text-decoration: none;"
+>
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44">
+  <path fill="none" d="M15 8l14.729 14.382L15 35.367" />
+</svg>
+</span>
+    <span class="logo__text"
+      >hello friend</span
+    >
+    <span class="logo__cursor"></span>
+  
+</a>
+
+      <div class="copyright">
+        <span
+          >© 2020 Powered by
+          <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a></span
+        >
+        <span
+          >Theme created by
+          <a href="https://twitter.com/panr" target="_blank" rel="noopener">panr</a></span
+        >
+      </div>
+    
+  </div>
+</footer>
+
+<script src="https://blog.brismuth.com/assets/main.js"></script>
+<script src="https://blog.brismuth.com/assets/prism.js"></script>
+
+
+      
+    </div>
+
+    
+  </body>
+</html>

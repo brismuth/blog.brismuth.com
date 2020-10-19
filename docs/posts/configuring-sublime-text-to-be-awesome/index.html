@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+      <title>
+        Configuring Sublime Text to be awesome ::
+        Hello Friend — A simple theme for Hugo
+      </title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta
+  name="description"
+  content="Your text editor could look like this.
+Sublime Text 3 is without a doubt my favorite text editor. It has a super flexible plugin API, and people have done some pretty amazing things with it. It has a much smaller footprint than an IDE like NetBeans/Eclipse/IntelliJ. It offers a lot of power with multi-cursor operations and bulk text editing. This post details some of my favorite plugins and the settings I prefer to use with Sublime."
+/>
+<meta
+  name="keywords"
+  content=""
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://blog.brismuth.com/posts/configuring-sublime-text-to-be-awesome/" />
+
+
+
+
+
+<link rel="stylesheet" href="https://blog.brismuth.com/assets/style.css" />
+
+<link rel="stylesheet" href="https://blog.brismuth.com/style.css" />
+
+
+<link
+  rel="apple-touch-icon-precomposed"
+  sizes="144x144"
+  href="https://blog.brismuth.com/img/apple-touch-icon-144-precomposed.png"
+/>
+<link rel="shortcut icon" href="https://blog.brismuth.com/img/favicon.png" />
+
+
+<link href="https://blog.brismuth.com/assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://blog.brismuth.com/assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://blog.brismuth.com/assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://blog.brismuth.com/assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://blog.brismuth.com/assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://blog.brismuth.com/assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://blog.brismuth.com/posts/configuring-sublime-text-to-be-awesome/images/1.png"/>
+
+<meta name="twitter:title" content="Configuring Sublime Text to be awesome"/>
+<meta name="twitter:description" content="Your text editor could look like this.
+Sublime Text 3 is without a doubt my favorite text editor. It has a super flexible plugin API, and people have done some pretty amazing things with it. It has a much smaller footprint than an IDE like NetBeans/Eclipse/IntelliJ. It offers a lot of power with multi-cursor operations and bulk text editing. This post details some of my favorite plugins and the settings I prefer to use with Sublime."/>
+
+
+
+<meta property="og:title" content="Configuring Sublime Text to be awesome" />
+<meta property="og:description" content="Your text editor could look like this.
+Sublime Text 3 is without a doubt my favorite text editor. It has a super flexible plugin API, and people have done some pretty amazing things with it. It has a much smaller footprint than an IDE like NetBeans/Eclipse/IntelliJ. It offers a lot of power with multi-cursor operations and bulk text editing. This post details some of my favorite plugins and the settings I prefer to use with Sublime." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.brismuth.com/posts/configuring-sublime-text-to-be-awesome/" />
+<meta property="og:image" content="https://blog.brismuth.com/posts/configuring-sublime-text-to-be-awesome/images/1.png" />
+<meta property="og:image" content="https://blog.brismuth.com/posts/configuring-sublime-text-to-be-awesome/images/2.png" />
+<meta property="article:published_time" content="2016-09-17T00:02:33+00:00" />
+<meta property="article:modified_time" content="2020-10-18T16:10:32-06:00" /><meta property="og:site_name" content="Hello Friend" />
+
+
+
+
+
+
+  </head>
+  <body class="dark-theme">
+    <div class="container">
+      <header class="header">
+  <span class="header__inner">
+    <a
+  href="/"
+  class="logo"
+  style="text-decoration: none;"
+>
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44">
+  <path fill="none" d="M15 8l14.729 14.382L15 35.367" />
+</svg>
+</span>
+    <span class="logo__text"
+      >hello friend</span
+    >
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+        
+          <li><a href="/showcase">Showcase</a></li>
+        
+      
+      
+      
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/about">About</a></li>
+      
+    
+      
+        <li><a href="/showcase">Showcase</a></li>
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg
+  class="theme-toggler"
+  width="24"
+  height="24"
+  viewBox="0 0 48 48"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"
+  />
+</svg>
+
+      </span>
+    </span>
+  </span>
+</header>
+
+
+      <div class="content">
+        
+  
+  
+
+  <div class="post">
+    <h1 class="post-title">Configuring Sublime Text to be awesome</h1>
+    <div class="post-meta">
+      
+        <span class="post-date">
+          2016-09-17
+        </span>
+
+        
+          
+        
+      
+
+      
+        <span class="post-author"
+          >— Written by Brian Smith</span
+        >
+
+
+      
+    </div>
+
+    
+
+    
+
+    <div class="post-content">
+      
+      <p><img src="/posts/configuring-sublime-text-to-be-awesome/images/1.png" alt="image">
+Your text editor could look like this.</p>
+<p>Sublime Text 3 is without a doubt my favorite text editor. It has a super flexible plugin API, and people have done some pretty amazing things with it. It has a much smaller footprint than an IDE like NetBeans/Eclipse/IntelliJ. It offers a lot of power with multi-cursor operations and bulk text editing. This post details some of my favorite plugins and the settings I prefer to use with Sublime.</p>
+<h4 id="step-1-install-package-control">Step 1: Install Package Control</h4>
+<p>First off, you’ll need to install Package Control. Package Control is basically the app store for Sublime. It makes installing plugins a breeze. To install it, follow the instructions on the <a href="https://packagecontrol.io/installation#Simple">Package Control website</a>.</p>
+<p>Now that you have Package Control installed, you can easily install plugins by hitting <strong>Ctrl</strong>+<strong>Shift</strong>+<strong>P</strong> (<strong>Cmd</strong>+<strong>Shift</strong>+<strong>P</strong> on Mac) and typing <em>install package</em> and hitting <strong>enter</strong>.</p>
+<p><img src="/posts/configuring-sublime-text-to-be-awesome/images/2.png" alt="image"></p>
+<p>You’ll be presented with a list of available plugins, which you can filter by typing in the name of the plugin you want.</p>
+<h4 id="step-2-install-these-awesome-plugins">Step 2: Install these awesome plugins</h4>
+<ul>
+<li><a href="https://packagecontrol.io/packages/SyncedSideBar"><strong>SyncedSideBar</strong></a> — This is possibly my favorite despite its simplicity. When you open a file (such as through the <a href="http://docs.sublimetext.info/en/latest/file_management/file_management.html#id1">Goto Anything</a> search), it jumps to that file in the left hand file system pane.</li>
+<li><a href="https://packagecontrol.io/packages/DocBlockr"><strong>DocBlockr</strong></a> — helps format your code documentation (especially functions)</li>
+<li><a href="https://packagecontrol.io/packages/Theme%20-%20Afterglow"><strong>Theme — Afterglow</strong></a> — This is just my favorite theme. I love the customized file icons and the new tab layout.</li>
+<li><a href="https://packagecontrol.io/packages/Git"><strong>Git</strong></a> — Provides some nice git functionality in Sublime, including seeing line by line blames and annotations.</li>
+<li><a href="https://packagecontrol.io/packages/VCS%20Gutter"><strong>VCS Gutter</strong></a>****— This shows your version control diffs in the side bar. New lines have a green plus, changed lines have a yellow square, and deleted lines have red tags. You can see an example of each in the screenshot at the top of this post.</li>
+<li><a href="https://packagecontrol.io/packages/JSCS-Formatter"><strong>JSCS-Formatter</strong></a> — Automatically formats your code according to your <a href="http://jscs.info/">JSCS</a> settings.</li>
+<li><a href="https://packagecontrol.io/packages/SublimeLinter"><strong>SublimeLinter</strong></a> — A framework for linting in Sublime.</li>
+<li><a href="https://packagecontrol.io/packages/SublimeLinter-jscs"><strong>SublimeLinter-jscs</strong></a> —****Lets you set up automatic <a href="http://jscs.info/">JSCS</a> linting.</li>
+<li><a href="https://packagecontrol.io/packages/SublimeCodeIntel"><strong>SublimeCodeIntel</strong></a>****— This one is a bit more resource heavy, so I don’t always install it. It adds some IDE-like functionality such <strong>cmd</strong>+<strong>click</strong> to get to function definitions and better code completion.</li>
+<li><a href="https://packagecontrol.io/packages/MarkdownEditing"><strong>MarkdownEditing</strong></a>****— This has nice formatting for editing <a href="https://en.wikipedia.org/wiki/Markdown">markdown</a> files. It’s a must-have for editing markdown in Sublime. It has a light theme by default, but you can change that in the preferences.</li>
+<li><a href="https://packagecontrol.io/packages/Dockerfile%20Syntax%20Highlighting"><strong>Dockerfile Syntax Highlighting</strong></a> — Just adds syntax highlighting for docker files. Sublime doesn’t do that by default.</li>
+</ul>
+<h4 id="step-3-set-up-your-user-preferences">Step 3: Set up your user preferences</h4>
+<p>One of the nice things about Sublime is that it has highly customizable settings that let you change behavior, appearance, and more. You can read about them and all available preferences in the Sublime default preferences file. Here are Sublime’s instructions for modifying settings: <a href="https://www.sublimetext.com/docs/3/settings.html">https://www.sublimetext.com/docs/3/settings.html</a>.</p>
+<p>These are my preferred settings:
+<code>{   &amp;#34;color_scheme&amp;#34;: &amp;#34;Packages/User/SublimeLinter/Monokai (SL).tmTheme&amp;#34;,   &amp;#34;find_selected_text&amp;#34;: true,   &amp;#34;folder_exclude_patterns&amp;#34;:   [   &amp;#34;node_modules&amp;#34;,   &amp;#34;.git&amp;#34;   ],   &amp;#34;font-size&amp;#34;: 14,   &amp;#34;font_size&amp;#34;: 10,   &amp;#34;ignored_packages&amp;#34;:   [   &amp;#34;Vintage&amp;#34;   ],   &amp;#34;sidebar_size_12&amp;#34;: true,   &amp;#34;status_bar_brighter&amp;#34;: true,   &amp;#34;tabs_small&amp;#34;: true,   &amp;#34;theme&amp;#34;: &amp;#34;Afterglow-green.sublime-theme&amp;#34;,   &amp;#34;trim_trailing_white_space_on_save&amp;#34;: true,   &amp;#34;word_wrap&amp;#34;: false   }</code></p>
+<p>On some operating systems Sublime no longer has hot keys set for opening the project switcher. If that’s the case for you, you can add this to your User key bindings file to get your project switcher back.
+<code>[   { &amp;#34;keys&amp;#34;: [&amp;#34;ctrl+alt+p&amp;#34;], &amp;#34;command&amp;#34;: &amp;#34;prompt_select_workspace&amp;#34; }   ]</code></p>
+<p>I also like to add this to <strong><em>Packages/User/Markdown.sublime-settings</em></strong> so my markdown files have a dark theme:
+<code>{   &amp;#34;color_scheme&amp;#34;: &amp;#34;Packages/MarkdownEditing/MarkdownEditor-Dark.tmTheme&amp;#34;,   }</code></p>
+<h4 id="step-4-build-awesome-stuff">Step 4: Build awesome stuff</h4>
+<p>Your text editor is now ready to help you build awesome stuff. Enjoy!</p>
+
+    </div>
+    
+      
+        <div class="pagination">
+          <div class="pagination__title">
+            <span class="pagination__title-h"
+              >Read other posts</span
+            >
+            <hr />
+          </div>
+          <div class="pagination__buttons">
+            
+              <span class="button previous">
+                <a href="https://blog.brismuth.com/posts/scheduling-automated-zfs-scrubs/">
+                  <span class="button__icon">←</span>
+                  <span class="button__text">Scheduling automated ZFS scrubs</span>
+                </a>
+              </span>
+            
+            
+              <span class="button next">
+                <a href="https://blog.brismuth.com/posts/why-my-blog-is-on-medium/">
+                  <span class="button__text">Why my blog is on Medium</span>
+                  <span class="button__icon">→</span>
+                </a>
+              </span>
+            
+          </div>
+        </div>
+      
+    
+
+    
+      
+        
+
+      
+    
+  </div>
+
+      </div>
+
+      
+        <footer class="footer">
+  <div class="footer__inner">
+    
+      <a
+  href="/"
+  class="logo"
+  style="text-decoration: none;"
+>
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44">
+  <path fill="none" d="M15 8l14.729 14.382L15 35.367" />
+</svg>
+</span>
+    <span class="logo__text"
+      >hello friend</span
+    >
+    <span class="logo__cursor"></span>
+  
+</a>
+
+      <div class="copyright">
+        <span
+          >© 2020 Powered by
+          <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a></span
+        >
+        <span
+          >Theme created by
+          <a href="https://twitter.com/panr" target="_blank" rel="noopener">panr</a></span
+        >
+      </div>
+    
+  </div>
+</footer>
+
+<script src="https://blog.brismuth.com/assets/main.js"></script>
+<script src="https://blog.brismuth.com/assets/prism.js"></script>
+
+
+      
+    </div>
+
+    
+  </body>
+</html>
